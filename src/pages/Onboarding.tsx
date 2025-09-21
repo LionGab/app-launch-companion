@@ -1,125 +1,124 @@
 import { useState } from "react";
 import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
-import { Heart, Target, Users, Sparkles } from "lucide-react";
+import { Heart, Baby, Calendar, Sparkles, Users } from "lucide-react";
 
-const purposes = [
-  { id: "growth", label: "Crescimento Pessoal", icon: Target },
-  { id: "community", label: "Construir Comunidade", icon: Users },
-  { id: "wellness", label: "Bem-estar", icon: Heart },
-  { id: "creativity", label: "Criatividade", icon: Sparkles }
+const journeyStages = [
+  {
+    id: "sonhadora",
+    title: "Sonhadora",
+    subtitle: "Sonho de ser mãe um dia",
+    description: "Educação reprodutiva e planejamento do futuro",
+    icon: Sparkles,
+    color: "from-pink-400 to-purple-400",
+  },
+  {
+    id: "preparadora",
+    title: "Preparadora", 
+    subtitle: "Tentando engravidar",
+    description: "Tracking de ovulação e suporte emocional",
+    icon: Calendar,
+    color: "from-purple-400 to-indigo-400",
+  },
+  {
+    id: "gestante",
+    title: "Gestante",
+    subtitle: "Grávida e radiante",
+    description: "Acompanhamento semanal personalizado",
+    icon: Heart,
+    color: "from-pink-500 to-rose-400",
+  },
+  {
+    id: "mae",
+    title: "Mãe Fresh",
+    subtitle: "Acabei de ser mãe",
+    description: "Suporte 24h e dicas práticas",
+    icon: Baby,
+    color: "from-rose-400 to-pink-500",
+  },
+  {
+    id: "apoiadora",
+    title: "Apoiadora",
+    subtitle: "Quero apoiar outras mulheres",
+    description: "Compartilhe experiências e apoie outras mães",
+    icon: Users,
+    color: "from-indigo-400 to-purple-500",
+  },
 ];
 
 interface OnboardingProps {
-  onComplete: (data: { name: string; purpose: string }) => void;
+  onStageSelect: (stage: string) => void;
 }
 
-const Onboarding = ({ onComplete }: OnboardingProps) => {
-  const [step, setStep] = useState(1);
-  const [name, setName] = useState("");
-  const [selectedPurpose, setSelectedPurpose] = useState("");
-
-  const handleSubmit = () => {
-    if (name && selectedPurpose) {
-      onComplete({ name, purpose: selectedPurpose });
-    }
-  };
+const Onboarding = ({ onStageSelect }: OnboardingProps) => {
+  const [selectedStage, setSelectedStage] = useState<string | null>(null);
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-background via-muted to-accent/20 p-4">
-      <div className="max-w-2xl mx-auto pt-20">
+    <div className="min-h-screen bg-gradient-to-br from-nava-rose via-background to-nava-lavender p-4">
+      <div className="max-w-4xl mx-auto pt-8">
         <div className="text-center mb-8">
-          <div className="w-20 h-20 mx-auto bg-gradient-to-r from-primary to-accent rounded-full flex items-center justify-center mb-6">
-            <Sparkles className="w-10 h-10 text-primary-foreground" />
+          <div className="mb-4">
+            <div className="w-20 h-20 mx-auto bg-gradient-to-r var(--gradient-primary) rounded-full flex items-center justify-center mb-4">
+              <Heart className="w-10 h-10 text-white" />
+            </div>
+            <h1 className="text-4xl font-bold bg-gradient-to-r from-primary to-pink-600 bg-clip-text text-transparent">
+              NAVA Journey
+            </h1>
           </div>
-          <h1 className="text-4xl font-bold bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent mb-2">
-            Constellation
-          </h1>
-          <p className="text-muted-foreground">Encontre sua constelação de pertencimento</p>
+          <p className="text-xl text-muted-foreground mb-2">
+            Sua jornada única como mulher
+          </p>
+          <p className="text-muted-foreground">
+            Escolha onde você está agora na sua jornada
+          </p>
         </div>
 
-        {step === 1 && (
-          <Card className="p-8">
-            <div className="space-y-6">
-              <div className="text-center">
-                <h2 className="text-2xl font-semibold mb-2">Como você gostaria de ser chamado?</h2>
-                <p className="text-muted-foreground">Seu nome será como outros membros te conhecerão</p>
-              </div>
-              
-              <div className="space-y-2">
-                <Label htmlFor="name">Seu nome</Label>
-                <Input
-                  id="name"
-                  placeholder="Digite seu nome..."
-                  value={name}
-                  onChange={(e) => setName(e.target.value)}
-                  className="text-lg p-4"
-                />
-              </div>
-
-              <Button 
-                onClick={() => setStep(2)} 
-                disabled={!name.trim()}
-                className="w-full"
-                size="lg"
+        <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3 mb-8">
+          {journeyStages.map((stage) => {
+            const IconComponent = stage.icon;
+            const isSelected = selectedStage === stage.id;
+            
+            return (
+              <Card
+                key={stage.id}
+                className={`p-6 cursor-pointer transition-all duration-300 hover:scale-105 hover:shadow-lg ${
+                  isSelected 
+                    ? "ring-2 ring-primary shadow-lg bg-gradient-to-br from-primary/10 to-primary/5" 
+                    : "hover:shadow-md"
+                }`}
+                onClick={() => setSelectedStage(stage.id)}
               >
-                Continuar
-              </Button>
-            </div>
-          </Card>
-        )}
+                <div className="text-center space-y-4">
+                  <div className={`w-16 h-16 mx-auto rounded-full bg-gradient-to-br ${stage.color} flex items-center justify-center`}>
+                    <IconComponent className="w-8 h-8 text-white" />
+                  </div>
+                  <div>
+                    <h3 className="text-xl font-semibold text-foreground">
+                      {stage.title}
+                    </h3>
+                    <p className="text-sm text-primary font-medium">
+                      {stage.subtitle}
+                    </p>
+                    <p className="text-sm text-muted-foreground mt-2">
+                      {stage.description}
+                    </p>
+                  </div>
+                </div>
+              </Card>
+            );
+          })}
+        </div>
 
-        {step === 2 && (
-          <Card className="p-8">
-            <div className="space-y-6">
-              <div className="text-center">
-                <h2 className="text-2xl font-semibold mb-2">Qual seu propósito principal?</h2>
-                <p className="text-muted-foreground">Isso nos ajuda a conectar você com pessoas similares</p>
-              </div>
-
-              <div className="grid gap-4">
-                {purposes.map((purpose) => {
-                  const IconComponent = purpose.icon;
-                  const isSelected = selectedPurpose === purpose.id;
-                  
-                  return (
-                    <Card
-                      key={purpose.id}
-                      className={`p-4 cursor-pointer transition-all hover:scale-[1.02] ${
-                        isSelected ? "ring-2 ring-primary bg-primary/5" : "hover:bg-muted/50"
-                      }`}
-                      onClick={() => setSelectedPurpose(purpose.id)}
-                    >
-                      <div className="flex items-center space-x-4">
-                        <div className="w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center">
-                          <IconComponent className="w-6 h-6 text-primary" />
-                        </div>
-                        <div>
-                          <h3 className="font-semibold">{purpose.label}</h3>
-                        </div>
-                      </div>
-                    </Card>
-                  );
-                })}
-              </div>
-
-              <div className="flex gap-4">
-                <Button variant="outline" onClick={() => setStep(1)} className="flex-1">
-                  Voltar
-                </Button>
-                <Button 
-                  onClick={handleSubmit} 
-                  disabled={!selectedPurpose}
-                  className="flex-1"
-                  size="lg"
-                >
-                  Entrar na Constellation
-                </Button>
-              </div>
-            </div>
-          </Card>
+        {selectedStage && (
+          <div className="text-center">
+            <Button
+              onClick={() => onStageSelect(selectedStage)}
+              size="lg"
+              className="bg-gradient-to-r from-primary to-pink-600 hover:from-primary/90 hover:to-pink-600/90 text-white px-8 py-3 text-lg font-semibold rounded-full shadow-lg hover:shadow-xl transition-all duration-300"
+            >
+              Começar minha jornada
+            </Button>
+          </div>
         )}
       </div>
     </div>

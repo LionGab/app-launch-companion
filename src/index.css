@@ -29,16 +29,16 @@ All colors MUST be HSL.
     --accent: 340 60% 90%;
     --accent-foreground: 340 15% 15%;
 
-    /* MVP Constellation Colors */
-    --constellation-purple: 260 75% 65%;
-    --constellation-blue: 210 85% 70%;
-    --constellation-teal: 180 70% 60%;
-    --constellation-soft: 250 30% 96%;
+    /* NAVA Theme Colors */
+    --nava-pink: 340 85% 55%;
+    --nava-rose: 350 75% 85%;
+    --nava-lavender: 280 60% 90%;
+    --nava-warm: 30 80% 95%;
 
     /* Gradients */
-    --gradient-primary: linear-gradient(135deg, hsl(260 75% 65%), hsl(210 85% 70%));
-    --gradient-soft: linear-gradient(135deg, hsl(250 50% 95%), hsl(240 40% 98%));
-    --gradient-warm: linear-gradient(180deg, hsl(250 30% 98%), hsl(240 20% 96%));
+    --gradient-primary: linear-gradient(135deg, hsl(340 85% 55%), hsl(350 75% 65%));
+    --gradient-soft: linear-gradient(135deg, hsl(340 60% 95%), hsl(350 50% 98%));
+    --gradient-warm: linear-gradient(180deg, hsl(340 50% 98%), hsl(30 80% 95%));
 
     --destructive: 0 84.2% 60.2%;
     --destructive-foreground: 210 40% 98%;
