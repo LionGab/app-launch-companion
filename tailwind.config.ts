@@ -57,6 +57,11 @@ export default {
           border: "hsl(var(--sidebar-border))",
           ring: "hsl(var(--sidebar-ring))",
         },
+        // NAVA Brand Colors
+        "nava-pink": "hsl(var(--nava-pink))",
+        "nava-coral": "hsl(var(--nava-coral))",
+        "nava-beige": "hsl(var(--nava-beige))",
+        "nava-soft-pink": "hsl(var(--nava-soft-pink))",
       },
       borderRadius: {
         lg: "var(--radius)",

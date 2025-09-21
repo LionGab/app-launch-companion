@@ -29,11 +29,11 @@ All colors MUST be HSL.
     --accent: 340 60% 90%;
     --accent-foreground: 340 15% 15%;
 
-    /* NAVA Theme Colors */
+    /* NAVA Theme Colors - Nathália Valente Brand */
     --nava-pink: 340 85% 55%;
-    --nava-rose: 350 75% 85%;
-    --nava-lavender: 280 60% 90%;
-    --nava-warm: 30 80% 95%;
+    --nava-coral: 15 85% 70%;
+    --nava-beige: 45 25% 85%;
+    --nava-soft-pink: 350 60% 88%;
 
     /* Gradients */
     --gradient-primary: linear-gradient(135deg, hsl(340 85% 55%), hsl(350 75% 65%));

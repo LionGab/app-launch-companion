@@ -21,34 +21,34 @@ import TrackingTab from "@/components/TrackingTab";
 
 const stageContent = {
   sonhadora: {
-    title: "Sua Jornada de Sonhadora ✨",
-    subtitle: "Preparando o terreno para seus sonhos",
-    color: "from-pink-400 to-purple-400",
-    features: ["Educação Reprodutiva", "Planejamento Familiar", "Comunidade de Sonhadoras"]
+    title: "Sonhando junto com você ✨",
+    subtitle: "Preparando o coração para essa jornada linda",
+    color: "from-pink-400 to-rose-400",
+    features: ["Educação Reprodutiva", "Planejamento dos Sonhos", "Comunidade NAVA"]
   },
-  preparadora: {
-    title: "Sua Jornada de Preparação 🌸",
-    subtitle: "Cada dia mais perto do seu sonho",
-    color: "from-purple-400 to-indigo-400", 
-    features: ["Tracking de Ovulação", "Dicas de Fertilidade", "Suporte Emocional"]
+  tentante: {
+    title: "Tentantes Guerreiras 🌸",
+    subtitle: "Cada ciclo é uma nova esperança",
+    color: "from-rose-400 to-pink-500", 
+    features: ["Tracking de Ciclo", "Dicas da Nath", "Suporte 24h"]
   },
-  gestante: {
-    title: "Sua Jornada Gestante 💗",
-    subtitle: "Vivendo o milagre da vida",
-    color: "from-pink-500 to-rose-400",
-    features: ["Acompanhamento Semanal", "Marcos da Gravidez", "Preparação para o Parto"]
+  gravida: {
+    title: "Grávidas NAVA 💗",
+    subtitle: "Vivendo cada momento dessa gestação",
+    color: "from-pink-500 to-red-400",
+    features: ["Semana a Semana", "Diário da Gestação", "Preparação Pro Parto"]
   },
-  mae: {
-    title: "Sua Jornada de Mãe Fresh 👶",
-    subtitle: "Os primeiros passos juntas",
-    color: "from-rose-400 to-pink-500",
-    features: ["SOS 24h", "Vlogs da Nathália", "Rede de Apoio"]
+  mae_fresh: {
+    title: "Mães Fresh como eu! 👶",
+    subtitle: "Puerpério real, sem filtro",
+    color: "from-red-400 to-pink-600",
+    features: ["Puerpério Real", "Vlogs Diários", "SOS Maternidade"]
   },
-  apoiadora: {
-    title: "Sua Jornada de Apoiadora 🤝",
-    subtitle: "Transformando vidas através do apoio",
-    color: "from-indigo-400 to-purple-500",
-    features: ["Mentoria", "Rede de Apoio", "Impacto Social"]
+  mae_real: {
+    title: "Mães na Vida Real 🤝",
+    subtitle: "A maternidade de verdade, com altos e baixos",
+    color: "from-pink-600 to-purple-500",
+    features: ["Rotina Real", "Rede de Apoio", "Autocuidado"]
   }
 };
 
@@ -62,7 +62,7 @@ const Dashboard = ({ currentStage, onStageChange }: DashboardProps) => {
   const content = stageContent[currentStage as keyof typeof stageContent];
   
   return (
-    <div className="min-h-screen bg-gradient-to-br from-nava-rose/30 via-background to-nava-lavender/30">
+    <div className="min-h-screen bg-gradient-to-br from-nava-soft-pink/30 via-background to-nava-beige/30">
       {/* Header */}
       <div className="bg-white/80 backdrop-blur-sm border-b border-border/50 sticky top-0 z-50">
         <div className="max-w-6xl mx-auto px-4 py-4">
@@ -72,8 +72,8 @@ const Dashboard = ({ currentStage, onStageChange }: DashboardProps) => {
                 <Heart className="w-5 h-5 text-white" />
               </div>
               <div>
-                <h1 className="text-xl font-bold text-foreground">NAVA Journey</h1>
-                <p className="text-sm text-muted-foreground">Olá, Maria! 👋</p>
+                <h1 className="text-xl font-bold text-foreground">NAVA Mães</h1>
+                <p className="text-sm text-muted-foreground">Oi, linda! Como você está? 💕</p>
               </div>
             </div>
             <div className="flex items-center gap-2">
@@ -122,7 +122,7 @@ const Dashboard = ({ currentStage, onStageChange }: DashboardProps) => {
             </TabsTrigger>
             <TabsTrigger value="chat" className="flex items-center gap-2">
               <MessageCircle className="w-4 h-4" />
-              IA Nathália
+              Conversar
             </TabsTrigger>
           </TabsList>
 
@@ -135,15 +135,15 @@ const Dashboard = ({ currentStage, onStageChange }: DashboardProps) => {
               </div>
               <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-4">
                 <div className="text-center p-4 bg-gradient-to-br from-primary/10 to-primary/5 rounded-lg">
-                  <div className="text-2xl font-bold text-primary">15</div>
-                  <div className="text-sm text-muted-foreground">Dias de streak</div>
+                  <div className="text-2xl font-bold text-primary">12</div>
+                  <div className="text-sm text-muted-foreground">Dias conectada</div>
                 </div>
                 <div className="text-center p-4 bg-gradient-to-br from-pink-500/10 to-pink-500/5 rounded-lg">
-                  <div className="text-2xl font-bold text-pink-600">89%</div>
-                  <div className="text-sm text-muted-foreground">Progress mensal</div>
+                  <div className="text-2xl font-bold text-pink-600">Thales</div>
+                  <div className="text-sm text-muted-foreground">2 meses hoje 💕</div>
                 </div>
                 <div className="text-center p-4 bg-gradient-to-br from-purple-500/10 to-purple-500/5 rounded-lg">
-                  <div className="text-2xl font-bold text-purple-600">247</div>
+                  <div className="text-2xl font-bold text-purple-600">347</div>
                   <div className="text-sm text-muted-foreground">Pontos NAVA</div>
                 </div>
               </div>
@@ -166,19 +166,19 @@ const Dashboard = ({ currentStage, onStageChange }: DashboardProps) => {
                 <div className="grid grid-cols-2 gap-4 text-sm">
                   <div className="flex items-center gap-2">
                     <div className="w-2 h-2 bg-green-500 rounded-full"></div>
-                    <span>Tracking diário ✅</span>
+                    <span>Check-in diário ✅</span>
                   </div>
                   <div className="flex items-center gap-2">
                     <div className="w-2 h-2 bg-green-500 rounded-full"></div>
-                    <span>Participação comunidade ✅</span>
+                    <span>Apoio na comunidade ✅</span>
                   </div>
                   <div className="flex items-center gap-2">
                     <div className="w-2 h-2 bg-green-500 rounded-full"></div>
-                    <span>Leitura educativa ✅</span>
+                    <span>Autocuidado ✅</span>
                   </div>
                   <div className="flex items-center gap-2">
                     <div className="w-2 h-2 bg-yellow-500 rounded-full"></div>
-                    <span>Exercício regular ⏳</span>
+                    <span>Exercício pós-parto ⏳</span>
                   </div>
                 </div>
               </div>
@@ -187,7 +187,7 @@ const Dashboard = ({ currentStage, onStageChange }: DashboardProps) => {
             {/* Latest from Nathália */}
             <Card className="p-6">
               <div className="flex items-center justify-between mb-4">
-                <h3 className="text-xl font-semibold">Últimas da Nathália</h3>
+                <h3 className="text-xl font-semibold">Direto da Nath</h3>
                 <BookOpen className="w-5 h-5 text-primary" />
               </div>
               <div className="space-y-4">
@@ -196,12 +196,12 @@ const Dashboard = ({ currentStage, onStageChange }: DashboardProps) => {
                     <Heart className="w-6 h-6 text-white" />
                   </div>
                   <div className="flex-1">
-                    <h4 className="font-semibold mb-1">Vlog: Minha rotina matinal na gravidez</h4>
+                    <h4 className="font-semibold mb-1">Real talk: Puerpério sem filtro</h4>
                     <p className="text-sm text-muted-foreground mb-2">
-                      Compartilho como adaptei minha rotina para cuidar melhor de mim e do bebê...
+                      Gente, vou contar pra vocês como está sendo essa fase... não é só amor e flores não, viu?
                     </p>
                     <Button variant="link" className="p-0 text-primary">
-                      Assistir agora →
+                      Ver o vídeo completo →
                     </Button>
                   </div>
                 </div>

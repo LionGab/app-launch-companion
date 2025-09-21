@@ -7,42 +7,42 @@ const journeyStages = [
   {
     id: "sonhadora",
     title: "Sonhadora",
-    subtitle: "Sonho de ser mãe um dia",
-    description: "Educação reprodutiva e planejamento do futuro",
+    subtitle: "Sonho em ser mãe um dia",
+    description: "Educação reprodutiva e preparação emocional",
     icon: Sparkles,
-    color: "from-pink-400 to-purple-400",
+    color: "from-pink-400 to-rose-400",
   },
   {
-    id: "preparadora",
-    title: "Preparadora", 
+    id: "tentante",
+    title: "Tentante", 
     subtitle: "Tentando engravidar",
-    description: "Tracking de ovulação e suporte emocional",
+    description: "Ciclos, ovulação e apoio emocional real",
     icon: Calendar,
-    color: "from-purple-400 to-indigo-400",
-  },
-  {
-    id: "gestante",
-    title: "Gestante",
-    subtitle: "Grávida e radiante",
-    description: "Acompanhamento semanal personalizado",
-    icon: Heart,
-    color: "from-pink-500 to-rose-400",
-  },
-  {
-    id: "mae",
-    title: "Mãe Fresh",
-    subtitle: "Acabei de ser mãe",
-    description: "Suporte 24h e dicas práticas",
-    icon: Baby,
     color: "from-rose-400 to-pink-500",
   },
   {
-    id: "apoiadora",
-    title: "Apoiadora",
-    subtitle: "Quero apoiar outras mulheres",
-    description: "Compartilhe experiências e apoie outras mães",
+    id: "gravida",
+    title: "Grávida",
+    subtitle: "Vivendo a gravidez",
+    description: "Semana a semana com a Nath",
+    icon: Heart,
+    color: "from-pink-500 to-red-400",
+  },
+  {
+    id: "mae_fresh",
+    title: "Mãe Fresh",
+    subtitle: "Recém-mãe como eu!",
+    description: "Puerpério, amamentação e autocuidado",
+    icon: Baby,
+    color: "from-red-400 to-pink-600",
+  },
+  {
+    id: "mae_real",
+    title: "Mãe Real",
+    subtitle: "Maternidade na vida real",
+    description: "Rotina, desafios e celebrações do dia a dia",
     icon: Users,
-    color: "from-indigo-400 to-purple-500",
+    color: "from-pink-600 to-purple-500",
   },
 ];
 
@@ -54,22 +54,22 @@ const Onboarding = ({ onStageSelect }: OnboardingProps) => {
   const [selectedStage, setSelectedStage] = useState<string | null>(null);
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-nava-rose via-background to-nava-lavender p-4">
+    <div className="min-h-screen bg-gradient-to-br from-nava-pink/30 via-background to-nava-coral/30 p-4">
       <div className="max-w-4xl mx-auto pt-8">
         <div className="text-center mb-8">
           <div className="mb-4">
-            <div className="w-20 h-20 mx-auto bg-gradient-to-r var(--gradient-primary) rounded-full flex items-center justify-center mb-4">
+            <div className="w-20 h-20 mx-auto bg-gradient-to-r from-nava-pink to-nava-coral rounded-full flex items-center justify-center mb-4">
               <Heart className="w-10 h-10 text-white" />
             </div>
-            <h1 className="text-4xl font-bold bg-gradient-to-r from-primary to-pink-600 bg-clip-text text-transparent">
-              NAVA Journey
+            <h1 className="text-4xl font-bold bg-gradient-to-r from-primary to-nava-coral bg-clip-text text-transparent">
+              NAVA Mães
             </h1>
           </div>
           <p className="text-xl text-muted-foreground mb-2">
-            Sua jornada única como mulher
+            Sua jornada de maternidade com a Nath
           </p>
           <p className="text-muted-foreground">
-            Escolha onde você está agora na sua jornada
+            Em qual fase você está agora, linda?
           </p>
         </div>
 
@@ -114,9 +114,9 @@ const Onboarding = ({ onStageSelect }: OnboardingProps) => {
             <Button
               onClick={() => onStageSelect(selectedStage)}
               size="lg"
-              className="bg-gradient-to-r from-primary to-pink-600 hover:from-primary/90 hover:to-pink-600/90 text-white px-8 py-3 text-lg font-semibold rounded-full shadow-lg hover:shadow-xl transition-all duration-300"
+              className="bg-gradient-to-r from-nava-pink to-nava-coral hover:from-nava-pink/90 hover:to-nava-coral/90 text-white px-8 py-3 text-lg font-semibold rounded-full shadow-lg hover:shadow-xl transition-all duration-300"
             >
-              Começar minha jornada
+              Bora começar! 💕
             </Button>
           </div>
         )}
