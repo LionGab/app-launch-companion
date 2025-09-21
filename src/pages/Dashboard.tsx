@@ -1,227 +1,200 @@
 import { useState } from "react";
-import { Card } from "@/components/ui/card";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import { Badge } from "@/components/ui/badge";
-import { Progress } from "@/components/ui/progress";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { 
-  Heart, 
-  Calendar, 
-  MessageCircle, 
-  Sparkles, 
-  Users, 
-  BookOpen,
-  Target,
-  Zap,
-  Crown
-} from "lucide-react";
-import CommunityTab from "@/components/CommunityTab";
-import AIChat from "@/components/AIChat";
-import TrackingTab from "@/components/TrackingTab";
-
-const stageContent = {
-  sonhadora: {
-    title: "Sua Jornada de Sonhadora ✨",
-    subtitle: "Preparando o terreno para seus sonhos",
-    color: "from-pink-400 to-purple-400",
-    features: ["Educação Reprodutiva", "Planejamento Familiar", "Comunidade de Sonhadoras"]
-  },
-  preparadora: {
-    title: "Sua Jornada de Preparação 🌸",
-    subtitle: "Cada dia mais perto do seu sonho",
-    color: "from-purple-400 to-indigo-400", 
-    features: ["Tracking de Ovulação", "Dicas de Fertilidade", "Suporte Emocional"]
-  },
-  gestante: {
-    title: "Sua Jornada Gestante 💗",
-    subtitle: "Vivendo o milagre da vida",
-    color: "from-pink-500 to-rose-400",
-    features: ["Acompanhamento Semanal", "Marcos da Gravidez", "Preparação para o Parto"]
-  },
-  mae: {
-    title: "Sua Jornada de Mãe Fresh 👶",
-    subtitle: "Os primeiros passos juntas",
-    color: "from-rose-400 to-pink-500",
-    features: ["SOS 24h", "Vlogs da Nathália", "Rede de Apoio"]
-  },
-  apoiadora: {
-    title: "Sua Jornada de Apoiadora 🤝",
-    subtitle: "Transformando vidas através do apoio",
-    color: "from-indigo-400 to-purple-500",
-    features: ["Mentoria", "Rede de Apoio", "Impacto Social"]
-  }
-};
+import { Badge } from "@/components/ui/badge";
+import { Users, MessageCircle, Target, ArrowLeft, Plus } from "lucide-react";
 
 interface DashboardProps {
-  currentStage: string;
-  onStageChange: () => void;
+  userData: { name: string; purpose: string };
+  onBack: () => void;
 }
 
-const Dashboard = ({ currentStage, onStageChange }: DashboardProps) => {
-  const [activeTab, setActiveTab] = useState("overview");
-  const content = stageContent[currentStage as keyof typeof stageContent];
-  
+const Dashboard = ({ userData, onBack }: DashboardProps) => {
+  const [activeTab, setActiveTab] = useState("home");
+
+  const connections = [
+    { name: "Ana Silva", purpose: "Crescimento Pessoal", avatar: "AS", status: "online" },
+    { name: "Carlos Santos", purpose: "Bem-estar", avatar: "CS", status: "offline" },
+    { name: "Maria Oliveira", purpose: "Criatividade", avatar: "MO", status: "online" }
+  ];
+
+  const projects = [
+    { title: "Meditação em Grupo", members: 8, type: "Bem-estar" },
+    { title: "Círculo de Leitura", members: 12, type: "Crescimento" },
+    { title: "Arte Colaborativa", members: 6, type: "Criatividade" }
+  ];
+
   return (
-    <div className="min-h-screen bg-gradient-to-br from-nava-rose/30 via-background to-nava-lavender/30">
-      {/* Header */}
-      <div className="bg-white/80 backdrop-blur-sm border-b border-border/50 sticky top-0 z-50">
-        <div className="max-w-6xl mx-auto px-4 py-4">
+    <div className="min-h-screen bg-gradient-to-br from-background via-muted to-accent/20">
+      <header className="border-b bg-card/50 backdrop-blur-sm">
+        <div className="max-w-7xl mx-auto px-4 py-4">
           <div className="flex items-center justify-between">
-            <div className="flex items-center gap-3">
-              <div className={`w-10 h-10 rounded-full bg-gradient-to-br ${content.color} flex items-center justify-center`}>
-                <Heart className="w-5 h-5 text-white" />
-              </div>
-              <div>
-                <h1 className="text-xl font-bold text-foreground">NAVA Journey</h1>
-                <p className="text-sm text-muted-foreground">Olá, Maria! 👋</p>
-              </div>
-            </div>
-            <div className="flex items-center gap-2">
-              <Badge variant="secondary" className="bg-primary/10 text-primary border-primary/20">
-                <Crown className="w-3 h-3 mr-1" />
-                Premium
-              </Badge>
-              <Button variant="ghost" size="sm" onClick={onStageChange}>
-                Mudar Fase
+            <div className="flex items-center space-x-4">
+              <Button variant="ghost" size="sm" onClick={onBack}>
+                <ArrowLeft className="w-4 h-4" />
               </Button>
+              <h1 className="text-2xl font-bold bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent">
+                Constellation
+              </h1>
+            </div>
+            <div className="flex items-center space-x-3">
+              <span className="text-sm text-muted-foreground">Olá, {userData.name}</span>
+              <div className="w-8 h-8 rounded-full bg-primary text-primary-foreground flex items-center justify-center">
+                {userData.name.charAt(0)}
+              </div>
             </div>
           </div>
         </div>
-      </div>
+      </header>
 
-      <div className="max-w-6xl mx-auto px-4 py-6">
-        {/* Stage Header */}
-        <div className="text-center mb-8">
-          <h2 className="text-3xl font-bold bg-gradient-to-r from-primary to-pink-600 bg-clip-text text-transparent mb-2">
-            {content.title}
-          </h2>
-          <p className="text-lg text-muted-foreground mb-4">{content.subtitle}</p>
-          <div className="flex flex-wrap justify-center gap-2">
-            {content.features.map((feature) => (
-              <Badge key={feature} variant="outline" className="border-primary/30 text-primary">
-                {feature}
-              </Badge>
-            ))}
-          </div>
-        </div>
-
-        {/* Main Tabs */}
-        <Tabs value={activeTab} onValueChange={setActiveTab} className="w-full">
-          <TabsList className="grid w-full grid-cols-4 mb-6">
-            <TabsTrigger value="overview" className="flex items-center gap-2">
-              <Sparkles className="w-4 h-4" />
-              Visão Geral
-            </TabsTrigger>
-            <TabsTrigger value="tracking" className="flex items-center gap-2">
-              <Target className="w-4 h-4" />
-              Tracking
-            </TabsTrigger>
-            <TabsTrigger value="community" className="flex items-center gap-2">
-              <Users className="w-4 h-4" />
-              Comunidade
-            </TabsTrigger>
-            <TabsTrigger value="chat" className="flex items-center gap-2">
-              <MessageCircle className="w-4 h-4" />
-              IA Nathália
-            </TabsTrigger>
+      <main className="max-w-7xl mx-auto px-4 py-8">
+        <Tabs value={activeTab} onValueChange={setActiveTab}>
+          <TabsList className="grid w-full grid-cols-3">
+            <TabsTrigger value="home">Início</TabsTrigger>
+            <TabsTrigger value="connections">Conexões</TabsTrigger>
+            <TabsTrigger value="projects">Projetos</TabsTrigger>
           </TabsList>
 
-          <TabsContent value="overview" className="space-y-6">
-            {/* Daily Insights */}
-            <Card className="p-6">
-              <div className="flex items-center justify-between mb-4">
-                <h3 className="text-xl font-semibold">Insights do Dia</h3>
-                <Zap className="w-5 h-5 text-primary" />
-              </div>
-              <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-4">
-                <div className="text-center p-4 bg-gradient-to-br from-primary/10 to-primary/5 rounded-lg">
-                  <div className="text-2xl font-bold text-primary">15</div>
-                  <div className="text-sm text-muted-foreground">Dias de streak</div>
-                </div>
-                <div className="text-center p-4 bg-gradient-to-br from-pink-500/10 to-pink-500/5 rounded-lg">
-                  <div className="text-2xl font-bold text-pink-600">89%</div>
-                  <div className="text-sm text-muted-foreground">Progress mensal</div>
-                </div>
-                <div className="text-center p-4 bg-gradient-to-br from-purple-500/10 to-purple-500/5 rounded-lg">
-                  <div className="text-2xl font-bold text-purple-600">247</div>
-                  <div className="text-sm text-muted-foreground">Pontos NAVA</div>
-                </div>
-              </div>
-            </Card>
+          <TabsContent value="home" className="space-y-6">
+            <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+              <Card>
+                <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
+                  <CardTitle className="text-sm font-medium">Suas Conexões</CardTitle>
+                  <Users className="h-4 w-4 text-muted-foreground" />
+                </CardHeader>
+                <CardContent>
+                  <div className="text-2xl font-bold">{connections.length}</div>
+                  <p className="text-xs text-muted-foreground">
+                    +2 desde a semana passada
+                  </p>
+                </CardContent>
+              </Card>
 
-            {/* Weekly Progress */}
-            <Card className="p-6">
-              <div className="flex items-center justify-between mb-4">
-                <h3 className="text-xl font-semibold">Progresso Semanal</h3>
-                <Calendar className="w-5 h-5 text-primary" />
-              </div>
-              <div className="space-y-4">
-                <div>
-                  <div className="flex justify-between text-sm mb-2">
-                    <span>Metas da Semana</span>
-                    <span>4/5</span>
-                  </div>
-                  <Progress value={80} className="h-2" />
-                </div>
-                <div className="grid grid-cols-2 gap-4 text-sm">
-                  <div className="flex items-center gap-2">
-                    <div className="w-2 h-2 bg-green-500 rounded-full"></div>
-                    <span>Tracking diário ✅</span>
-                  </div>
-                  <div className="flex items-center gap-2">
-                    <div className="w-2 h-2 bg-green-500 rounded-full"></div>
-                    <span>Participação comunidade ✅</span>
-                  </div>
-                  <div className="flex items-center gap-2">
-                    <div className="w-2 h-2 bg-green-500 rounded-full"></div>
-                    <span>Leitura educativa ✅</span>
-                  </div>
-                  <div className="flex items-center gap-2">
-                    <div className="w-2 h-2 bg-yellow-500 rounded-full"></div>
-                    <span>Exercício regular ⏳</span>
-                  </div>
-                </div>
-              </div>
-            </Card>
+              <Card>
+                <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
+                  <CardTitle className="text-sm font-medium">Projetos Ativos</CardTitle>
+                  <Target className="h-4 w-4 text-muted-foreground" />
+                </CardHeader>
+                <CardContent>
+                  <div className="text-2xl font-bold">{projects.length}</div>
+                  <p className="text-xs text-muted-foreground">
+                    Participando ativamente
+                  </p>
+                </CardContent>
+              </Card>
 
-            {/* Latest from Nathália */}
-            <Card className="p-6">
-              <div className="flex items-center justify-between mb-4">
-                <h3 className="text-xl font-semibold">Últimas da Nathália</h3>
-                <BookOpen className="w-5 h-5 text-primary" />
-              </div>
-              <div className="space-y-4">
-                <div className="flex gap-4 p-4 bg-gradient-to-r from-primary/5 to-transparent rounded-lg">
-                  <div className="w-12 h-12 bg-gradient-to-br from-primary to-pink-500 rounded-full flex items-center justify-center">
-                    <Heart className="w-6 h-6 text-white" />
-                  </div>
-                  <div className="flex-1">
-                    <h4 className="font-semibold mb-1">Vlog: Minha rotina matinal na gravidez</h4>
-                    <p className="text-sm text-muted-foreground mb-2">
-                      Compartilho como adaptei minha rotina para cuidar melhor de mim e do bebê...
-                    </p>
-                    <Button variant="link" className="p-0 text-primary">
-                      Assistir agora →
-                    </Button>
-                  </div>
+              <Card>
+                <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
+                  <CardTitle className="text-sm font-medium">Mensagens</CardTitle>
+                  <MessageCircle className="h-4 w-4 text-muted-foreground" />
+                </CardHeader>
+                <CardContent>
+                  <div className="text-2xl font-bold">12</div>
+                  <p className="text-xs text-muted-foreground">
+                    Não lidas hoje
+                  </p>
+                </CardContent>
+              </Card>
+            </div>
+
+            <Card>
+              <CardHeader>
+                <CardTitle>Sua Constelação</CardTitle>
+                <p className="text-sm text-muted-foreground">
+                  Pessoas conectadas com propósitos similares ao seu: {userData.purpose}
+                </p>
+              </CardHeader>
+              <CardContent>
+                <div className="space-y-4">
+                  {connections.slice(0, 3).map((connection, index) => (
+                    <div key={index} className="flex items-center justify-between">
+                      <div className="flex items-center space-x-3">
+                        <div className="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center">
+                          {connection.avatar}
+                        </div>
+                        <div>
+                          <p className="font-medium">{connection.name}</p>
+                          <p className="text-sm text-muted-foreground">{connection.purpose}</p>
+                        </div>
+                      </div>
+                      <Badge variant={connection.status === "online" ? "default" : "secondary"}>
+                        {connection.status}
+                      </Badge>
+                    </div>
+                  ))}
                 </div>
-              </div>
+              </CardContent>
             </Card>
           </TabsContent>
 
-          <TabsContent value="tracking">
-            <TrackingTab stage={currentStage} />
+          <TabsContent value="connections" className="space-y-6">
+            <div className="flex justify-between items-center">
+              <h2 className="text-3xl font-bold">Suas Conexões</h2>
+              <Button>
+                <Plus className="w-4 h-4 mr-2" />
+                Encontrar Pessoas
+              </Button>
+            </div>
+
+            <div className="grid gap-4">
+              {connections.map((connection, index) => (
+                <Card key={index}>
+                  <CardContent className="p-6">
+                    <div className="flex items-center justify-between">
+                      <div className="flex items-center space-x-4">
+                        <div className="w-16 h-16 rounded-full bg-gradient-to-br from-primary to-accent text-primary-foreground flex items-center justify-center">
+                          {connection.avatar}
+                        </div>
+                        <div>
+                          <h3 className="text-lg font-semibold">{connection.name}</h3>
+                          <p className="text-muted-foreground">{connection.purpose}</p>
+                          <Badge variant={connection.status === "online" ? "default" : "secondary"} className="mt-2">
+                            {connection.status}
+                          </Badge>
+                        </div>
+                      </div>
+                      <Button variant="outline">
+                        <MessageCircle className="w-4 h-4 mr-2" />
+                        Conversar
+                      </Button>
+                    </div>
+                  </CardContent>
+                </Card>
+              ))}
+            </div>
           </TabsContent>
 
-          <TabsContent value="community">
-            <CommunityTab stage={currentStage} />
-          </TabsContent>
+          <TabsContent value="projects" className="space-y-6">
+            <div className="flex justify-between items-center">
+              <h2 className="text-3xl font-bold">Projetos Coletivos</h2>
+              <Button>
+                <Plus className="w-4 h-4 mr-2" />
+                Criar Projeto
+              </Button>
+            </div>
 
-          <TabsContent value="chat">
-            <AIChat />
+            <div className="grid gap-4 md:grid-cols-2">
+              {projects.map((project, index) => (
+                <Card key={index}>
+                  <CardHeader>
+                    <CardTitle>{project.title}</CardTitle>
+                    <p className="text-sm text-muted-foreground">{project.members} membros participando</p>
+                  </CardHeader>
+                  <CardContent>
+                    <div className="flex items-center justify-between">
+                      <Badge variant="secondary">{project.type}</Badge>
+                      <Button variant="outline" size="sm">
+                        Ver Detalhes
+                      </Button>
+                    </div>
+                  </CardContent>
+                </Card>
+              ))}
+            </div>
           </TabsContent>
         </Tabs>
-      </div>
+      </main>
     </div>
   );
 };
